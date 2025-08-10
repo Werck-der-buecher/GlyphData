@@ -1,0 +1,3 @@
+[submodule "adaattn"]
+	path = adaattn
+	url = https://github.com/Huage001/AdaAttN.git
