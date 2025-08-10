@@ -64,7 +64,7 @@ wdb-data-rasterize
 : Directory where rasterized font files will be saved. \[Required.\].
 
 ### 2. `image-dump`
-You can create an image dump of the glyph images. Optionally, you can also save the respective skeleton images. This utility function is useful if you want to evaluate the rasterization results or if you want to directly use the synthetic glyph images for stylization with AdaAttN without further augmentation.  
+You can create an image dump of the glyph images. Optionally, you can also save the respective skeleton images. This utility function is useful if you want to evaluate the rasterization results or want to use the images and their skeletons for other means. 
 
 ```bash
 wdb-data-dump   
@@ -95,7 +95,7 @@ wdb-data-dump
 
 ### 3. `augment`
 
-It is generally benefitial to augment the rasterized glyph images before stylization with AdaAttN to obtain a much greater diversity of image characteristics. The augmentation uses several different randomized processing steps, including: 
+We augment the rasterized glyph images before stylization with AdaAttN to obtain a much greater diversity of image characteristics. The augmentation uses several different randomized processing steps, including: 
 1. morphological erosion and dilation, 
 2. rotation, 
 3. scaling, 
@@ -108,7 +108,7 @@ It is generally benefitial to augment the rasterized glyph images before styliza
 11. splatter background noise 
 
 **Notes**
-- The output of this process is divided into three subdirectories: "_sized", "_residual", and "composite". For further processing, e.g., for stylization with AdaAttN, you want to use "composite" as the image source. There, the augmented images are stored.
+- The output of this process is divided into three subdirectories: "_resized", "_residual", and "composite". For further processing, e.g., for stylization with AdaAttN, you want to use "composite" as the image source. There, the augmented images are stored.
 - Please note that the number of augmentations you specify in the command below is *per rasterized glyph*. For example, if you have 250 rasterized glyphs and define "num-augmentation" as 20, you'll obtain 250*20=5000 augmented images.
 
 ```bash
@@ -135,7 +135,7 @@ wdb-data-augment
 
 ### 4. `stylize`
 
-To stylize the synthetic glyph images (or their augmented variant), we use the style transfer technique AdaAttN. Given *content* images and a handful of *style* images, this deep learning method generates images that adapt the style of the content images while retaining their original structure. This is highly useful and demonstrated great empirical results.
+To stylize the augmented glyph images, we use the style transfer technique AdaAttN. Given *content* images and a handful of *style* images, this deep learning method generates images that adapt the style of the content images while retaining their original structure. This is highly useful and demonstrated great empirical results.
 
 ```bash
 wdb-data-stylize   
@@ -161,4 +161,3 @@ wdb-data-stylize
 
 - "--max-results", "-m", \[INTEGER\]
 : Maximum number of output files.
-

@@ -36,7 +36,7 @@ from glyphdata.utils.io_utils import decompress_pickle, validate_positive_int
     help='Square image size as a single integer (e.g., 128)'
 )
 def font_augment(raster_dir, output_dir, num_augmentations, image_size):
-    odir_sized = Path(output_dir).joinpath("_sized")
+    odir_sized = Path(output_dir).joinpath("_resized")
     odir_residual = Path(output_dir).joinpath("_residual")
     odir_composite = Path(output_dir).joinpath("composite")
     odir_sized.mkdir(exist_ok=True, parents=True)
